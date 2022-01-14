@@ -2,10 +2,8 @@ package edu.zjnu;
 
 import edu.zjnu.conf.Config;
 import edu.zjnu.core.Server;
-import edu.zjnu.core.http.HttpServlet;
+import edu.zjnu.core.HttpServlet;
 import edu.zjnu.exception.ServerException;
-
-import java.io.IOException;
 
 /**
  * @description: 程序入口
@@ -14,7 +12,7 @@ import java.io.IOException;
  **/
 public class BootStrap {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args)  {
         try {
             Server server = new Server(Config.port ,new HttpServlet());
             server.start();

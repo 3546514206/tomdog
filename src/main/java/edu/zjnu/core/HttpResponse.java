@@ -1,4 +1,4 @@
-package edu.zjnu.core.http;
+package edu.zjnu.core;
 
 import java.util.Map;
 

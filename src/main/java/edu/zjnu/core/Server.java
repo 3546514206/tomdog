@@ -2,9 +2,6 @@ package edu.zjnu.core;
 
 import edu.zjnu.conf.CodeStatus;
 import edu.zjnu.conf.Constant;
-import edu.zjnu.core.http.HttpRequest;
-import edu.zjnu.core.http.HttpResponse;
-import edu.zjnu.core.http.HttpServlet;
 import edu.zjnu.exception.ServerException;
 
 import java.io.*;
