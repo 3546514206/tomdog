@@ -1,4 +1,4 @@
-package edu.zjnu;
+package edu.zjnu.core;
 
 import edu.zjnu.conf.Config;
 import edu.zjnu.core.Server;
@@ -12,12 +12,14 @@ import edu.zjnu.exception.ServerException;
  **/
 public class BootStrap {
 
-    public static void main(String[] args)  {
+    public void load() {
         try {
-            Server server = new Server(Config.port ,new HttpServlet());
+            System.out.println("服务器配置： 端口[" + Config.port + "]");
+            Server server = new Server(Config.port, new HttpServlet());
             server.start();
             System.out.println("服务器启动成功, 您现在可以访问 http://localhost:" + server.getPort());
         } catch (ServerException e) {
+
             System.out.println("服务器启动失败...");
             e.printStackTrace();
         }

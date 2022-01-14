@@ -1,6 +1,7 @@
 package edu.zjnu.core;
 
 import edu.zjnu.conf.CodeStatus;
+import edu.zjnu.conf.Config;
 import edu.zjnu.conf.Constant;
 import edu.zjnu.exception.ServerException;
 
@@ -45,10 +46,11 @@ public class Server {
         try {
             ServerSocketChannel channel = ServerSocketChannel.open();
             channel.configureBlocking(false);
-            channel.bind(new InetSocketAddress(80));
+            channel.bind(new InetSocketAddress(Config.port));
             selector = Selector.open();
             channel.register(selector, SelectionKey.OP_ACCEPT);
         } catch (IOException e) {
+            e.printStackTrace();
             throw new ServerException("管道启动失败");
         }
     }
@@ -94,7 +96,7 @@ public class Server {
         read(socketChannel, out);
         // 坑：浏览器空数据
         if (out.size() == 0) {
-            System.out.println("关闭连接："+ socketChannel.getRemoteAddress());
+            System.out.println("关闭连接：" + socketChannel.getRemoteAddress());
             socketChannel.close();
             return;
         }

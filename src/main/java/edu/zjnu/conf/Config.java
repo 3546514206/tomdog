@@ -7,5 +7,7 @@ package edu.zjnu.conf;
  **/
 public class Config {
 
-    public static final int port = 80;
+    public static final int port = 8999;
+
+//    public static final String host = "81.68.198.75";
 }
