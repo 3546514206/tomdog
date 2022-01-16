@@ -208,7 +208,7 @@ public class Server {
         // 响应头
         if (response.getBody() != null && response.getBody().length() > 0) {
             builder.append("Content-Length:").append(response.getBody().length()).append("\r\n");
-            builder.append("Content-Type:text/html\r\n");
+            builder.append("Content-Type:application/json;charset=utf-8\r\n");
         }
         if (response.getHeaders() != null) {
             String headStr = response.getHeaders().entrySet().stream().map(e -> e.getKey() + ":" + e.getValue())

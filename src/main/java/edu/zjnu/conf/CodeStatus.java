@@ -22,15 +22,7 @@ public enum  CodeStatus {
         return status;
     }
 
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
     public String getDesc() {
         return desc;
-    }
-
-    public void setDesc(String desc) {
-        this.desc = desc;
     }
 }

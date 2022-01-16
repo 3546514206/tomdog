@@ -17,9 +17,10 @@ public class BootStrap {
             System.out.println("服务器配置： 端口[" + Config.port + "]");
             Server server = new Server(Config.port, new HttpServlet());
             server.start();
-            System.out.println("服务器启动成功, 您现在可以访问 http://localhost:" + server.getPort());
-        } catch (ServerException e) {
-
+            System.out.println("服务器启动成功");
+            Class.forName("edu.zjnu.biz.DataBase");
+            Class.forName("edu.zjnu.core.ControllerFactory");
+        } catch (ServerException | ClassNotFoundException e) {
             System.out.println("服务器启动失败...");
             e.printStackTrace();
         }
