@@ -16,9 +16,25 @@ public class UserController extends BaseController {
     @RequestMapping(url = "/getUserList", method = RequestMethod.POST)
     public List<User> getUserList(Map param) {
         List<User> userList = (List<User>) DataBase.DATABASE.get("userList");
-        userList.forEach(e->{
+        userList.forEach(e -> {
             System.out.println(e.toString());
         });
         return userList;
+    }
+
+    @RequestMapping(url = "/getUserById", method = RequestMethod.POST)
+    public User getUserById(Long userId) {
+
+        List<User> users = (List) DataBase.DATABASE.values();
+
+        User rs = null;
+        for (User user : users) {
+            if (userId.equals(user.getUserId())) {
+                rs = user;
+                break;
+            }
+        }
+
+        return rs;
     }
 }

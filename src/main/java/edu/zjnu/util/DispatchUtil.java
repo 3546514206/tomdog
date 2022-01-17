@@ -27,15 +27,20 @@ public class DispatchUtil {
 
         for (BaseController controller : controllerMap.values()) {
             // 获取所有的业务接口
-            java.lang.reflect.Method[] methods = controller.getClass().getMethods();
+            java.lang.reflect.Method[] methods = controller.getClass().getDeclaredMethods();
             //根据注解获取到请求的接口并执行
             for (Method method : methods) {
                 RequestMapping requestMapping = method.getAnnotation(RequestMapping.class);
-                System.out.println("即将请求业务接口");
 
+                System.out.println("即将请求业务接口");
                 if (requestMapping.url().equalsIgnoreCase(url)
                         && requestMapping.method().getRequestMethod().equalsIgnoreCase(requestMethod)) {
                     try {
+                        Class<?>[] parameterTypes = method.getParameterTypes();
+                        for (Class<?> parameterType : parameterTypes) {
+                            System.out.println(parameterType.toGenericString());
+                            System.out.println(parameterType.toString());
+                        }
                         Object o = method.invoke(controller, new HashMap<>());
                         //处理返回的业务数据
                         return ResponseUtil.hand(o);
