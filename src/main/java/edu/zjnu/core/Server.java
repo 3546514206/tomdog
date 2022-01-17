@@ -145,7 +145,6 @@ public class Server {
 
             // 解析起始行
             String firstLine = in.readLine();
-            System.out.println(firstLine);
             String[] split = firstLine.split(" ");
             request.setMethod(split[0]);
             request.setUrl(split[1]);
