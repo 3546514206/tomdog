@@ -37,7 +37,7 @@ public class Server {
     private final HttpServlet servlet;
 
     // 线程池
-    private ExecutorService service = Executors.newSingleThreadExecutor();
+    private ExecutorService service =         Executors.newSingleThreadExecutor();
 
     public Server(int port, HttpServlet servlet) throws ServerException {
         this.port = port;
