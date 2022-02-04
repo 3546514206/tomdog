@@ -1,5 +1,6 @@
 package edu.zjnu.util;
 
+import com.alibaba.fastjson.JSON;
 import edu.zjnu.biz.BaseController;
 import edu.zjnu.core.*;
 import edu.zjnu.exception.ServerException;
@@ -20,6 +21,7 @@ public class DispatchUtil {
     public static String dispatchUtil(HttpRequest request, HttpResponse response) throws ServerException {
         String url = request.getUrl();
         String requestMethod = request.getMethod();
+        String bodyString = request.getBody();
 
         if (null == url) return "";
 
@@ -36,12 +38,8 @@ public class DispatchUtil {
                 if (requestMapping.url().equalsIgnoreCase(url)
                         && requestMapping.method().getRequestMethod().equalsIgnoreCase(requestMethod)) {
                     try {
-                        Class<?>[] parameterTypes = method.getParameterTypes();
-                        for (Class<?> parameterType : parameterTypes) {
-                            System.out.println(parameterType.toGenericString());
-                            System.out.println(parameterType.toString());
-                        }
-                        Object o = method.invoke(controller, new HashMap<>());
+                        Map map = (HashMap<String, String>) JSON.parse(bodyString);
+                        Object o = method.invoke(controller,map );
                         //处理返回的业务数据
                         return ResponseUtil.hand(o);
                     } catch (IllegalAccessException | InvocationTargetException e) {
