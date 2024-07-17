@@ -4,47 +4,9 @@ import (
 	"fmt"
 	"net"
 	"strconv"
-	"syscall"
 	"testing"
 	"time"
 )
-
-// TCP 系统调用的缓冲区大小
-func TestTcpBufSize(t *testing.T) {
-	// 创建一个临时的 TCP 连接
-	conn, err := net.Dial("tcp", "127.0.0.1:7077")
-	if err != nil {
-		fmt.Printf("Dial error: %v\n", err)
-		return
-	}
-
-	defer func(conn net.Conn) {
-		err := conn.Close()
-		if err != nil {
-			panic(err)
-		}
-	}(conn)
-
-	// 获取底层文件描述符
-	fd, _ := conn.(*net.TCPConn).File()
-
-	// 获取 TCP 缓冲区大小
-	rBufferSize, err := syscall.GetsockoptInt(syscall.Handle(int(fd.Fd())), syscall.SOL_SOCKET, syscall.SO_RCVBUF)
-	if err != nil {
-		fmt.Printf("GetsockoptInt error: %v\n", err)
-		return
-	}
-
-	sBufferSize, err := syscall.GetsockoptInt(syscall.Handle(int(fd.Fd())), syscall.SOL_SOCKET, syscall.SO_SNDBUF)
-	if err != nil {
-		fmt.Printf("GetsockoptInt error: %v\n", err)
-		return
-	}
-
-	fmt.Printf("默认接收缓冲区大小：%d\n", rBufferSize)
-	fmt.Printf("默认发送缓冲区大小：%d\n", sBufferSize)
-
-}
 
 func TestClientSample(t *testing.T) {
 	fmt.Println("client test ... start")
